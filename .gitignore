@@ -1,0 +1,6 @@
+.idea
+*.sqlite3
+*.pyc
+production.py
+development.py
+logs/

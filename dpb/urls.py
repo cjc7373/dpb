@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from pastebin.views import Index, Snippet
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', Index.as_view()),
+    path('<slug:key>/', Snippet.as_view()),
 ]
