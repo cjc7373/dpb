@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<pre style="white-space: pre">
-{{ code }}
-</pre>
+    <style>
+        {{ style }}
+    </style>
+    <code>
+        {% autoescape off %}
+            {{ code }}
+        {% endautoescape %}
+    </code>
 {% endblock %}

@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 django = "*"
+pygments = "*"
 
 [dev-packages]
 pre-commit = "*"
