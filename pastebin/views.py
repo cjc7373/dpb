@@ -16,7 +16,7 @@ def create_paste(content):
         key_len = 4
         try:
             key = get_random_string(key_len)
-            Pastebin.objects.create(key=key, content=content)
+            Pastebin.objects.create(key=key, content=content, length=len(content))
             return key
         except IntegrityError:
             key_len += 1
@@ -51,4 +51,3 @@ class Snippet(View):
         style = HtmlFormatter().get_style_defs('.highlight')
         html = highlight(snippet.content, guess_lexer(snippet.content), HtmlFormatter())
         return render(request, 'code.html', {'code': html, 'style': style})
-        # return HttpResponse(html)
