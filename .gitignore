@@ -4,3 +4,5 @@
 production.py
 development.py
 logs/
+.env/
+data/
