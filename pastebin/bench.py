@@ -2,7 +2,22 @@
 To test the collision rate.
 """
 
-from django.utils.crypto import get_random_string
+import os
+import random
+
+
+def get_random_string(
+    length, allowed_chars=('abcdefghijklmnopqrstuvwxyz' 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')
+):
+    """
+    This function is similar to django.utils.crypto.get_random_string,
+    only replace `secrets` to `random`.
+    """
+    r = ''.join(random.choice(allowed_chars) for i in range(length))
+    return r
+
+
+print(f"This process has PID: {os.getpid()}")
 
 data = {}
 all_tries = {4: 0, 5: 0, 6: 0, 7: 0}

@@ -5,9 +5,10 @@
 #    pipenv lock --requirements
 #
 
--i https://pypi.tuna.tsinghua.edu.cn/simple
-asgiref==3.3.1; python_version >= '3.5'
-django==3.1.7
-pygments==2.8.1
+-i http://mirrors.aliyun.com/pypi/simple/
+--trusted-host mirrors.aliyun.com
+asgiref==3.4.1; python_version >= '3.6'
+django==3.2.6
+pygments==2.9.0
 pytz==2021.1
 sqlparse==0.4.1; python_version >= '3.5'
