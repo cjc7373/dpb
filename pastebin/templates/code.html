@@ -1,10 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <button class="a"><a href="/raw/{{ key }}">raw</a></button>
     <style>
         {{ style }}
         span {
             white-space: normal;
+        }
+
+        button > a {
+            text-decoration: none;
+        }
+
+        button.a {
+            padding: 0;
+            user-select: none;
         }
     </style>
     <code>
