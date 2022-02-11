@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "dpb"
+version = "0.1.0"
+description = "A simple pastebin powered by Django."
+authors = ["cjc7373 <niuchangcun@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^4.0.2"
+Pygments = "^2.11.2"
+
+[tool.poetry.dev-dependencies]
+pre-commit = "^2.17.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
