@@ -11,13 +11,13 @@ from .forms import PastebinForm
 from .models import Pastebin
 
 
-def create_paste(content):
+def create_paste(content: str) -> Pastebin:
     while True:
         key_len = 4
         try:
             key = get_random_string(key_len)
-            Pastebin.objects.create(key=key, content=content, length=len(content))
-            return key
+            paste = Pastebin.objects.create(key=key, content=content, length=len(content))
+            return paste
         except IntegrityError:
             key_len += 1
 
@@ -29,8 +29,8 @@ class Index(View):
     def post(self, request):
         form = PastebinForm(request.POST)
         if form.is_valid():
-            key = create_paste(form.cleaned_data['content'])
-            return redirect(f'/{key}/')
+            paste = create_paste(form.cleaned_data['content'])
+            return redirect(f'/{paste.key}/')
         else:
             return render(request, 'index.html', {'form': form})
 
@@ -39,8 +39,8 @@ class IndexAPI(View):
     def post(self, request):
         form = PastebinForm(request.POST)
         if form.is_valid():
-            key = create_paste(form.cleaned_data['content'])
-            return HttpResponse(f"{request.META['HTTP_HOST']}/{key}/\n")
+            paste = create_paste(form.cleaned_data['content'])
+            return HttpResponse(f"{request.META['HTTP_HOST']}/{paste.key}/\n")
         else:
             return HttpResponse(repr(form.errors) + '\n', status=400)
 

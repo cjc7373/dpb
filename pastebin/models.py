@@ -11,3 +11,8 @@ class Pastebin(models.Model):
 
     def __str__(self):
         return self.key
+
+
+class Misc(models.Model):
+    key = models.TextField(db_index=True, primary_key=True)
+    value = models.TextField()
