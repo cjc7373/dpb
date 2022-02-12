@@ -1,8 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form method="POST">
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-</form>
+    <h1>Dpb</h1>
+    <h2>A simple pastebin.</h2>
+    <form method="POST">
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+    <footer>Source code available at:
+        <a href="https://github.com/cjc7373/dpb">https://github.com/cjc7373/dpb</a>
+    </footer>
 {% endblock %}
