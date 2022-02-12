@@ -4,9 +4,10 @@
     <button class="a"><a href="/raw/{{ key }}">raw</a></button>
     <style>
         {{ style }}
-        span {
-            white-space: normal;
-        }
+        {# FIXME: 这会使缩进产生问题.. #}
+        {#span {#}
+        {#    white-space: normal;#}
+        {#}#}
 
         .linenos {
             user-select: none;
