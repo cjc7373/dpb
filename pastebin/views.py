@@ -49,7 +49,8 @@ class Snippet(View):
     def get(self, request, key):
         snippet = get_object_or_404(Pastebin, key=key)
         style = HtmlFormatter().get_style_defs('.highlight')
-        html = highlight(snippet.content, guess_lexer(snippet.content), HtmlFormatter())
+        formatter = HtmlFormatter(linenos='inline', wrapcode=True)
+        html = highlight(snippet.content, guess_lexer(snippet.content), formatter)
         return render(request, 'code.html', {'code': html, 'style': style, 'key': key})
 
 
