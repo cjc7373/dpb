@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <button class="a"><a href="/raw/{{ key }}/">raw</a></button>
+    <a class="button" href="/raw/{{ key }}/">raw</a>
     <style>
         {{ style }}
         {# FIXME: 这会使缩进产生问题.. #}
@@ -15,14 +15,16 @@
             width: 20px;
         }
 
-        button > a {
+
+        a.button {
             text-decoration: none;
+            user-select: none;
+            padding: 0;
+            border: solid 1px;
+            color: black;
+            background-color: #e7e7e7;
         }
 
-        button.a {
-            padding: 0;
-            user-select: none;
-        }
     </style>
     <code>
         {% autoescape off %}
