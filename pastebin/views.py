@@ -57,4 +57,4 @@ class Snippet(View):
 class RawSnippet(View):
     def get(self, request, key):
         snippet = get_object_or_404(Pastebin, key=key)
-        return HttpResponse(snippet.content, content_type="text/plain")
+        return HttpResponse(snippet.content, content_type="text/plain; charset=utf-8")
