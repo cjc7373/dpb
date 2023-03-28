@@ -2,21 +2,26 @@
 
 {% block content %}
     <a class="button" href="/raw/{{ key }}/">raw</a>
+    <button id="copyButton" onclick="copy()">copy</button>
     <style>
         {{ style }}
-        {# FIXME: 这会使缩进产生问题.. #}
-        {#span {#}
-        {#    white-space: normal;#}
-        {#}#}
+        {# FIXME: 可能有缩进问题.. #}
+        span {
+            white-space: normal;
+            word-break: break-all;
+        }
 
         .linenos {
             user-select: none;
             display: inline-block;
-            width: 20px;
+            width: 30px;
+            font-size: 0.8rem;
+            font-style: italic;
         }
 
 
-        a.button {
+        button, a.button {
+            font-family: monospace;
             text-decoration: none;
             user-select: none;
             padding: 0;
@@ -26,9 +31,30 @@
         }
 
     </style>
-    <code>
+    <code id="code">
         {% autoescape off %}
             {{ code }}
         {% endautoescape %}
     </code>
+
+    <script>
+        function copy() {
+            // FIXME: This is just a workaround to do not coppy line numbers...
+            const style = document.createElement('style');
+            style.innerHTML = `
+              .linenos {
+                display: none !important;
+              }
+            `;
+            document.head.appendChild(style);
+            navigator.clipboard.writeText(document.getElementById("code").innerText).then(
+                () => {
+                  document.getElementById("copyButton").textContent = "copied";
+                },
+                () => {
+                  alert("Failed to copy to clipboard.");
+                },
+              );
+        }
+    </script>
 {% endblock %}
