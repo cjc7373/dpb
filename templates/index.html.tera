@@ -1,15 +1,35 @@
 {% extends "base" %}
 
 {% block content %}
-<h1>Dpb</h1>
-<h2>A simple pastebin.</h2>
-<p>The programming language of the snippet you typed is guessed by Pygments.
-    You are not able to select by yourself.</p>
-<form method="POST">
-    {# {{ form.as_p }} #}
-    <button type="submit">Submit</button>
-</form>
-<footer>Source code available at:
-    <a href="https://github.com/cjc7373/dpb">https://github.com/cjc7373/dpb</a>
-</footer>
+<div class="bg-gray-100 min-h-screen xl flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-screen-2xl">
+        <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Dpb-rs</h1>
+        <h2>A simple pastebin.</h2>
+        <p>The programming language of the snippet you typed is guessed by Pygments.
+            You are not able to select by yourself.</p>
+        <div class="mb-6 mt-6">
+            <form method="POST">
+                {# {{ form.as_p }} #}
+                <button type="submit">Submit</button>
+            </form>
+            <textarea id="pasteContent" rows="10"
+                class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Enter your text here..."></textarea>
+            </div>
+            
+            <button id="saveButton"
+                class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors">
+                Save Paste
+            </button>
+            
+            <div id="savedPastes" class="mt-8">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-700">Saved Pastes</h2>
+                <ul id="pasteList" class="space-y-2"></ul>
+            </div>
+
+        <footer>Source code available at:
+            <a href="https://github.com/cjc7373/dpb">https://github.com/cjc7373/dpb</a>
+        </footer>
+    </div>
+    </div>
 {% endblock %}
