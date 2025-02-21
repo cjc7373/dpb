@@ -1,11 +1,6 @@
 {% extends "base" %}
 
 {% block content %}
-{# <div class="bg-gray-100 min-h-screen xl flex items-center justify-center">
-    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-screen-2xl">
-
-    </div>
-</div> #}
 <h2>A simple pastebin.</h2>
 <p>The programming language of the snippet you typed is guessed by Highlight.js.
     You are not able to select by yourself.</p>

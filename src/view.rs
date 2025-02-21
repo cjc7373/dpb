@@ -15,6 +15,11 @@ pub struct Snippet<'r> {
     content: &'r str,
 }
 
+#[get("/")]
+pub async fn index() -> Template {
+    Template::render("index", context! {})
+}
+
 #[get("/<key>")]
 pub async fn get_snippet(key: &str, mut db: Connection<Db>) -> Template {
     let res = sqlx::query!("select * from pastebin where key = ?", key)
@@ -76,15 +81,6 @@ pub async fn new_snippet(
             }
         }
     }
-
-    let account = sqlx::query!("select (1) as id, 'Herp Derpinson' as name")
-        .fetch_one(&mut **db)
-        .await
-        .unwrap();
-
-    // anonymous struct has `#[derive(Debug)]` for convenience
-    println!("{account:?}");
-    println!("{}: {}", account.id, account.name);
 
     Ok(Redirect::to(uri!(get_snippet(key = &random_string))))
 }
