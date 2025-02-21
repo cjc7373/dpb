@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pastebin</title>
 
-    <script async defer data-domain="paste.coherence.space" src="https://analytics.coherence.space/js/plausible.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script async defer data-domain="paste.coherence.space"
+        src="https://analytics.coherence.space/js/plausible.js"></script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    {% block extra_head %}{% endblock %}
 </head>
+
 <body>
-    {% block content %}{% endblock %}
+    <div class="w-5xl m-auto">
+        <p class="text-2xl font-bold text-gray-800 my-4">dpb-rs</p>
+        {% block content %}{% endblock %}
+    </div>
 </body>
+
 </html>

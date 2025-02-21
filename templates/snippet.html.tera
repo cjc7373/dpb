@@ -1,9 +1,54 @@
 {% extends "base" %}
 
+{% block extra_head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/a11y-light.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+{% endblock %}
+
 {% block content %}
-<div>
-    <p>length: {{ length }}</p>
-    <p>created_time: {{ created_time }}</p>
+<div class="mt-4">
+    <button class="rounded-lg transition bg-gray-300 hover:bg-gray-400 px-3 py-1 text-sm mr-2"
+        onclick="raw()">raw</button>
+    <button id="copy" class="rounded-lg transition bg-gray-300 hover:bg-gray-400 px-3 py-1 text-sm"
+        onclick="copy()">copy</button>
 </div>
-{{ content }}
+
+<pre>
+    <code id="code" class="rounded-lg">{{ content }}</code>
+</pre>
+
+<p class="text-sm mb-4">created at <span id="date"></span></p>
+
+<style>
+    /* to overwrite heihlight.js's background color */
+    #code {
+        background: #f3f3f3;
+    }
+</style>
+
+<script>
+    function copy() {
+        navigator.clipboard.writeText(document.getElementById("code").innerText).then(
+            () => {
+                document.getElementById("copy").textContent = "copied";
+                setTimeout(() => {
+                    document.getElementById("copy").textContent = "copy";
+                }, 2000)
+            },
+            () => {
+                alert("Failed to copy to clipboard.");
+            },
+        );
+    }
+
+    function raw() {
+        window.location.href = '/raw/{{ key }}';
+    }
+
+    let date = new Date({{ created_time }} * 1000);
+    // console.log(date.toLocaleString());
+    document.getElementById("date").textContent = date.toLocaleString();
+
+    hljs.highlightAll();
+</script>
 {% endblock %}

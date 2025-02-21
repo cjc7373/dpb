@@ -32,20 +32,33 @@ pub async fn get_snippet(key: &str, mut db: Connection<Db>) -> Template {
     Template::render("snippet", &context)
 }
 
+#[get("/raw/<key>")]
+pub async fn raw_snippet(key: &str, mut db: Connection<Db>) -> Option<String> {
+    let res = sqlx::query!("select * from pastebin where key = ?", key)
+        .fetch_one(&mut **db)
+        .await
+        .unwrap();
+
+    res.content
+}
+
 #[post("/", data = "<snippet>")]
-pub async fn new_snippet(snippet: Form<Snippet<'_>>, mut db: Connection<Db>) -> Result<Redirect, Status> {
+pub async fn new_snippet(
+    snippet: Form<Snippet<'_>>,
+    mut db: Connection<Db>,
+) -> Result<Redirect, Status> {
     let random_string = Alphanumeric.sample_string(&mut rand::thread_rng(), 4);
     let now = Utc::now();
 
     let res = sqlx::query(
         "insert into pastebin (key, content, created_time, length) values (?,?,?,?) returning key",
     )
-        .bind(&random_string)
-        .bind(snippet.content)
-        .bind(now.timestamp())
-        .bind(snippet.content.len() as u32)
-        .fetch_one(&mut **db)
-        .await;
+    .bind(&random_string)
+    .bind(snippet.content)
+    .bind(now.timestamp())
+    .bind(snippet.content.len() as u32)
+    .fetch_one(&mut **db)
+    .await;
 
     match res {
         Ok(row) => {
