@@ -23,7 +23,7 @@ struct Db(sqlx::SqlitePool);
 #[launch]
 fn rocket() -> _ {
     rocket::build()
-        .mount("/", routes![index,view::new_snippet])
+        .mount("/", routes![index,view::new_snippet, view::get_snippet])
         .attach(Template::fairing())
         .attach(Db::init())
 }

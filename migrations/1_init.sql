@@ -4,5 +4,5 @@ CREATE TABLE pastebin (
     language TEXT,
     created_time INTEGER,
     expire_time INTEGER,
-    length INTEGER,
-)
+    length INTEGER
+);

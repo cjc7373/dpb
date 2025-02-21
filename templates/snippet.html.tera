@@ -1,0 +1,9 @@
+{% extends "base" %}
+
+{% block content %}
+<div>
+    <p>length: {{ length }}</p>
+    <p>created_time: {{ created_time }}</p>
+</div>
+{{ content }}
+{% endblock %}
