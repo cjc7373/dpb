@@ -1,3 +1,7 @@
+use rocket::{
+    fairing::{self, AdHoc},
+    Build, Rocket,
+};
 use rocket_dyn_templates::Template;
 
 mod view;
@@ -10,8 +14,21 @@ use rocket_db_pools::{sqlx, Database};
 #[database("data")]
 struct Db(sqlx::SqlitePool);
 
+async fn run_migrations(rocket: Rocket<Build>) -> fairing::Result {
+    match Db::fetch(&rocket) {
+        Some(db) => match sqlx::migrate!("./migrations").run(&**db).await {
+            Ok(_) => Ok(rocket),
+            Err(e) => {
+                error!("Failed to initialize SQLx database: {}", e);
+                Err(rocket)
+            }
+        },
+        None => Err(rocket),
+    }
+}
+
 #[launch]
-fn rocket() -> _ {
+async fn rocket() -> _ {
     rocket::build()
         .mount(
             "/",
@@ -24,4 +41,5 @@ fn rocket() -> _ {
         )
         .attach(Template::fairing())
         .attach(Db::init())
+        .attach(AdHoc::try_on_ignite("SQLx Migrations", run_migrations))
 }

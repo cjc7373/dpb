@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pastebin</title>
+    <title>dpb-rs</title>
 
     <script async defer data-domain="paste.coherence.space"
         src="https://analytics.coherence.space/js/plausible.js"></script>
@@ -14,7 +14,7 @@
 
 <body>
     <div class="w-5xl m-auto">
-        <p class="text-2xl font-bold text-gray-800 my-4">dpb-rs</p>
+        <p class="text-2xl font-bold text-gray-800 my-4"><a href="/">dpb-rs</a></p>
         {% block content %}{% endblock %}
     </div>
 </body>

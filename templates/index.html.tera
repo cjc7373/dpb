@@ -2,8 +2,10 @@
 
 {% block content %}
 <h2>A simple pastebin.</h2>
-<p>The programming language of the snippet you typed is guessed by Highlight.js.
-    You are not able to select by yourself.</p>
+<p>The programming language of the snippet is guessed by Highlight.js.
+    You are not able to select by yourself. Snippets older than 1 month may be cleaned up. The maximum length of one
+    snippet is 1024KB.
+</p>
 <div class="mb-6 mt-6">
     <form method="POST">
         {# {{ form.as_p }} #}
