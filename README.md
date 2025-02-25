@@ -4,4 +4,4 @@ A simple pastebin powered by ~~Django~~ rocket. This is a rust version of the or
 I don't want to use an external service, so I choose sqlite.
 
 ## Run with docker
-`docker run -p 8080:8080 -v ./data:/app/data cjc7373/dpb-rs:1.0`
+`docker run -p 8080:8080 -v ./data:/app/data cjc7373/dpb:1.0`
