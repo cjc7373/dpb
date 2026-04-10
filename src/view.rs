@@ -11,6 +11,7 @@ use crate::Db;
 
 #[derive(FromForm)]
 pub struct Snippet<'r> {
+    #[field(validate = len(1..))]
     content: &'r str,
 }
 

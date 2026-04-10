@@ -1,4 +1,4 @@
-FROM rust:1.84 AS builder
+FROM rust:1.94 AS builder
 WORKDIR /app
 COPY . .
 # the /app/target is not available in the second stage, so copy the binary
