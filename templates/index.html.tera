@@ -20,6 +20,39 @@
 </button>
 
 </form>
+
+<form id="uploadForm" method="POST" action="/upload" enctype="multipart/form-data">
+    <input type="file" name="file" id="fileInput" class="hidden" onchange="this.form.submit()">
+    <div id="dropZone" onclick="document.getElementById('fileInput').click()"
+        class="mt-4 border-2 border-dashed border-gray-400 rounded-lg p-6 text-center cursor-pointer transition hover:border-green-500 hover:bg-green-50">
+        <p class="text-gray-500" id="dropText">Click or drag a file here to upload</p>
+    </div>
+</form>
+
+<script>
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const dropText = document.getElementById('dropText');
+
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('border-green-500', 'bg-green-50');
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('border-green-500', 'bg-green-50');
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('border-green-500', 'bg-green-50');
+        if (e.dataTransfer.files.length > 0) {
+            fileInput.files = e.dataTransfer.files;
+            document.getElementById('uploadForm').submit();
+        }
+    });
+</script>
+
 <footer class="my-4">Source code available at:
     <a href="https://github.com/cjc7373/dpb">https://github.com/cjc7373/dpb</a>
 </footer>

@@ -3,3 +3,9 @@ template_dir = "templates"
 
 [default.databases.data]
 url = "data/db.sqlite"
+
+[default.limits]
+form = "1MiB"
+data-form = "1MiB"
+string = "1MiB"
+file = "1MiB"

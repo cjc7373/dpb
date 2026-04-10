@@ -1,6 +1,7 @@
 use chrono::prelude::*;
 use rand::distributions::{Alphanumeric, DistString};
 use rocket::form::Form;
+use rocket::fs::TempFile;
 use rocket::http::Status;
 use rocket::response::Redirect;
 use rocket_db_pools::{sqlx, Connection};
@@ -10,7 +11,6 @@ use crate::Db;
 
 #[derive(FromForm)]
 pub struct Snippet<'r> {
-    #[field(validate = len(..1024*1024))]
     content: &'r str,
 }
 
@@ -56,6 +56,21 @@ pub async fn raw_snippet(key: &str, mut db: Connection<Db>) -> Option<String> {
             None
         }
     }
+}
+
+#[derive(FromForm)]
+pub struct Upload<'r> {
+    file: TempFile<'r>,
+}
+
+#[post("/upload", data = "<upload>")]
+pub async fn upload_file(upload: Form<Upload<'_>>, db: Connection<Db>) -> Result<Redirect, Status> {
+    let path = upload.file.path().ok_or(Status::InternalServerError)?;
+    let content = rocket::tokio::fs::read_to_string(path)
+        .await
+        .map_err(|_| Status::UnprocessableEntity)?;
+
+    new_snippet(Form::from(Snippet { content: &content }), db).await
 }
 
 #[post("/", data = "<snippet>")]

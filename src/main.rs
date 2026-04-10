@@ -35,6 +35,7 @@ async fn rocket() -> _ {
             routes![
                 view::index,
                 view::new_snippet,
+                view::upload_file,
                 view::get_snippet,
                 view::raw_snippet
             ],
