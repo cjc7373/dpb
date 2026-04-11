@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class="w-5xl m-auto">
+    <div class="w-full md:w-5xl m-auto px-4">
         <p class="text-2xl font-bold text-gray-800 my-4"><a href="/">dpb-rs</a></p>
         {% block content %}{% endblock %}
     </div>
